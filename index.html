@@ -1,0 +1,65 @@
+<!Doctype html>
+
+<html lang="en">
+    <header>
+        <title>JQuery Ace!</title>
+
+        <!--Eric Meyers Reset CSS -->
+        <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+        <!-- My Stylesheet, featuring GRIDS -->
+        <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+        <!--meta for viewport for responsive screens-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--meta for older IE-->
+        <meta http-equiv="X-UA-Compatible" content="IE=8">
+    </header>
+
+
+    <body>
+        <head>
+            <nav>
+                <div class="controls">
+                    <!--Game Controls Go here-->
+                    <a id="start">Start</a>
+                </div>
+            </nav>
+        </head>
+
+    
+        <!--- Area where characters are displayed-->
+        <section class="StagingArea">
+            <h1>CHARACTERS</h1>
+            <img src="assets/images/mig21.jpg" id ="mig21">
+            <img src="assets/images/f16.jpg" id ="f16">
+            <img src="assets/images/typhoon.jpg" id ="typhoon">
+
+        </section>
+
+        <!--Area where selected enemy and player go for BATTLE-->
+        <section class="DefenderZone">
+            DEFENDER
+        </section>
+
+        <!--- Area where non-player selected Characters are displayed-->
+        <section class="Enemies">
+            ENEMIES
+        </section>
+        <!--- link to image credits-->
+        <foot>
+            CREDITS
+        </foot>
+        <!--- link to jQuery-->
+
+        <!--- link to the google JQuery CDN-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+        <!--- link to my java script-->
+        <script src="assets/javascript/game.js"></script>
+
+    </body>
+
+    
+
+    
+</html>

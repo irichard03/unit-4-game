@@ -1,0 +1,10 @@
+img {
+    height: 300px;
+    width: 400px;
+    border: solid black 4px;
+    border-radius: 50%;
+}
+
+body {
+    background-color: skyblue;
+}
