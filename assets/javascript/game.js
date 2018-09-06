@@ -1,21 +1,65 @@
 
-
+//Character Object, will house jets and their properties.
 var character = {
-  hitPoints: 0,
-  attackPower: 0,
-  counterAttackPower: 0,
-
-  attack: function(target){
-    return target.hitPoints - this.counterAttackPower;
-  }
-    
-  counterAttack: function(target){
-    return target.hitPoints - this.counterAttackPower;
-  }
+  hitPoints: -1,
+  attackPower: -1,
+  counterAttackPower: -1,
+  jetName: "potato",
+  player: false
 
 
+};
+
+//Constructor function to create Character Objects, arguments number, number, number, string, boolean
+function Character(hp, ap, cap, jet, cpu) {
+  this.hitPoints = hp;
+  this.attackPower = ap;
+  this.counterAttackPower = cap;
+  this.jetName = jet;
+  this.player = cpu;
+}
+
+var MyJets = 4; //need more jets? Add assets and update const.
+var paths = [ 'assets/images/mig21.jpg', 'assets/images/F-15.jpg', 'assets/images/F16.jpg', 'assets/images/typhoon.jpg']
+//here's where it happens...
+function main(){
+  $(document).ready(function() {
+  
+    //Build html in buildPage Function
+    alert("BuildPageCalled"); 
+  
+    buildPage();
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  });
 
 }
+
+function buildPage(){
+  
+    $('.airField').append('<img src="assets/images/f15.jpg" id="eagle">');
+    $('.airField').append('<img src="assets/images/mig21.jpg" id="fishBed">');
+    $('.airField').append('<img src="assets/images/F16.jpg" id="falcon">');
+    $('.airField').append('<img src="assets/images/typhoon.jpg" id="typhoon">');
+    
+
+  
+}
+
+
+//Excecute all the things in main.
+main();
+
+
+
 
 
 
