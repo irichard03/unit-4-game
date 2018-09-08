@@ -29,6 +29,12 @@ function Character(hp, ap, cap, jet, cpu) {
   var eighthGrid = $(".grid-item[data-grid~='8'");
   var ninthGrid = $(".grid-item[data-grid~='9'");
   var paths = ["<img src='assets/images/f16.jpg' id='viper' data-type='preChoice'>","<img src='assets/images/mig21.jpg' id='fishbed' data-type='preChoice'>","<img src='assets/images/typhoon.jpg' id='typhoon' data-type='preChoice'>"];
+  
+  //Object instantiation
+  var viper = new Character(25,50,100,"F-16 Viper",false);
+  var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false);
+  var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false);
+
 
 $(document).ready(function() {
   buildPage();
@@ -43,13 +49,13 @@ function buildPage(){
 
   firstGrid.append(paths[0]).on("click", function() {
       
-      let viper = new Character(25,50,100,"F-16 Viper",true);
-      let fishbed = new Character(25,25,25,"Mig-21 Fishbed",false);
-      let typhoon = new Character(100,50,100, "Eurofighter Typhoon", false);
-      
+      viper.player = true;
+     
       $("h2").text("You chose the " + viper.jetName);
       
       goClear();
+      reBuildPage();
+       
       
       
 
@@ -57,26 +63,26 @@ function buildPage(){
   
   secondGrid.append(paths[1]).on("click", function() {
       
-      let fishbed = new Character(25,25,25,"Mig-21 Fishbed",true);
-      let viper = new Character(25,50,100,"F-16 Viper",false);
-      let typhoon = new Character(100,50,100, "Eurofighter Typhoon", false);
-
+    fishbed.player = true;
+    console.log(fishbed.player);
+   
       $("h2").text("You chose the " + fishbed.jetName);
       
       goClear();
+      reBuildPage(); 
+      
       
   });
   
   thirdGrid.append(paths[2]).on("click", function() {
-      
-      let typhoon = new Character(100,50,100, "Eurofighter Typhoon", true);
-      let fishbed = new Character(25,25,25,"Mig-21 Fishbed",false);
-      let viper = new Character(25,50,100,"F-16 Viper",false);
-
+    
+    typhoon.player = true; 
+    
       $("h2").text("You chose the " + typhoon.jetName);
 
       goClear();
-  
+      reBuildPage();
+     
   });
   
   
@@ -86,10 +92,22 @@ function buildPage(){
 function goClear(){
   $("img[data-type~='preChoice'").css("opacity", "0.2");
   $(".grid-item").off();
-                          
+                         
 }
 
+function reBuildPage(){
+  if(viper.player === true){
+    fourthGrid.append(paths[0]);
+  }
+  
+  if(fishbed.player){
+    fourthGrid.append(paths[1]);
+  }
 
+  if(typhoon.player){
+    fourthGrid.append(paths[2]);
+  }
+}
 
 /**
  * 
