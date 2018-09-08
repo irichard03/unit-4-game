@@ -6,8 +6,6 @@ var character = {
   counterAttackPower: -1,
   jetName: "potato",
   player: false
-  
-
 };
 
 //Constructor function to create Character Objects, arguments number, number, number, string, boolean
@@ -18,7 +16,7 @@ function Character(hp, ap, cap, jet, cpu) {
   this.jetName = jet;
   this.player = cpu;
   
-}
+};
 
   //assigning jquery selectors to vars for easier selection.
   var firstGrid = $(".grid-item[data-grid~='1'");
@@ -30,17 +28,12 @@ function Character(hp, ap, cap, jet, cpu) {
   var seventhGrid = $(".grid-item[data-grid~='7'");
   var eighthGrid = $(".grid-item[data-grid~='8'");
   var ninthGrid = $(".grid-item[data-grid~='9'");
-  var paths = ["<img src='assets/images/f16.jpg' id='viper' data-type='preChoice'>","<img src='assets/images/mig21.jpg' id='fishbed' data-type='preChoice'>","<img src='assets/images/typhoon.jpg' id='typhoon' data-type='preChoice'>"]
+  var paths = ["<img src='assets/images/f16.jpg' id='viper' data-type='preChoice'>","<img src='assets/images/mig21.jpg' id='fishbed' data-type='preChoice'>","<img src='assets/images/typhoon.jpg' id='typhoon' data-type='preChoice'>"];
 
-//My initial goal is to house function calls in main to make code cleaner, and avoid scope issues
-function main(){
-  
-  $(document).ready(function() {
-    buildPage();
-  
-  });
+$(document).ready(function() {
+  buildPage();
+});
 
-}
 
 //Populates my html Grid with selectable fighters and creates jets objects as either player or cpu.
 function buildPage(){
@@ -95,14 +88,6 @@ function goClear(){
   $(".grid-item").off();
                           
 }
-
-
-//Excecute all the things in main.
-main();
-
-
-
-
 
 
 
