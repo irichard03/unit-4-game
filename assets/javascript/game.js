@@ -6,7 +6,7 @@ var character = {
   counterAttackPower: -1,
   jetName: "potato",
   player: false
-
+  
 
 };
 
@@ -17,21 +17,27 @@ function Character(hp, ap, cap, jet, cpu) {
   this.counterAttackPower = cap;
   this.jetName = jet;
   this.player = cpu;
+  
 }
 
-var MyJets = 4; //need more jets? Add assets and update const.
-var paths = [ 'assets/images/mig21.jpg', 'assets/images/F-15.jpg', 'assets/images/F16.jpg', 'assets/images/typhoon.jpg']
+var MyJets = 3; //was going to do 4 jets but 9 grid is easier for central battle area.
+///var paths = [ 'assets/images/mig21.jpg', 'assets/images/f16.jpg', 'assets/images/typhoon.jpg']
+
 //here's where it happens...
 function main(){
+  
   $(document).ready(function() {
-  
-    //Build html in buildPage Function
-    
-  
     buildPage();
-    alert("BuildPageCalled"); 
-    $( "input[data-grid~='one']" ).append('img src="assets/images/mig21.jpg"');
+    
+    
+    
+
   
+    
+    
+
+
+    
   
   
   
@@ -43,18 +49,25 @@ function main(){
   });
 
 }
-
+//Populates my html Grid with selectable fighters and creates jets objects.
 function buildPage(){
-  /** 
-    $('.airField').append('<img src="assets/images/f15.jpg" id="eagle">');
-    $('.airField').append('<img src="assets/images/mig21.jpg" id="fishBed">');
-    $('.airField').append('<img src="assets/images/F16.jpg" id="falcon">');
-    $('.airField').append('<img src="assets/images/typhoon.jpg" id="typhoon">');
-  */
+  
+  alert("BuildPageCalled"); 
+  console.log("BuildPageCalled")
 
+  $(".grid-item[data-grid~='1'").append("<img src='assets/images/f16.jpg'>").on("click", function() {
+  //do this when clicked
+      let viper = new Character(25,50,100,"F-16 Viper",true);
+      alert("You chose the " + viper.jetName);
+      
+  });
+  
+  $(".grid-item[data-grid~='2'").append("<img src='assets/images/mig21.jpg'>");
+  
+  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg'>");
+  
   
 }
-
 
 //Excecute all the things in main.
 main();

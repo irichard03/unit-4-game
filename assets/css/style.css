@@ -1,19 +1,50 @@
+body {
+    background-image: url("../images/sky.jpg");
+    background-size: contain;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
-    background-color: #2196F3;
+    grid-template-rows: auto auto auto;
     padding: 10px;
   }
   .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
+    
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
     font-size: 30px;
     text-align: center;
+    
   }
 
   img {
-      width: 80%;
-      height: 80%;
+      width: 400px;
+      height: 360px;
+      border-radius: 50%;
+      border: solid 6px greenyellow;
+      background: transparent;
+      
+
+
+  }
+
+  h1 {
+      height: 60pxpx;
+      color: red;
+      background-color: skyblue;
+      font-size: 3em;
+      text-align: center;
+      margin-top: 0px;
+      padding-top: 20px;
+      background: transparent;
+  }
+
+  h2 {
+      
+      color: greenyellow;
+      height: 60px;
+      text-align: center;
+      background: transparent;
   }
 
