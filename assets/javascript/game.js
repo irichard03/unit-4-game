@@ -28,6 +28,7 @@ function main(){
   
   $(document).ready(function() {
     buildPage();
+    reBuildPage(viper,fishbed,typhoon);
 
   });
 
@@ -38,35 +39,50 @@ function buildPage(){
   alert("BuildPageCalled"); 
   console.log("BuildPageCalled")
 
-  //add jets and click events
-  $(".grid-item[data-grid~='1'").append("<img src='assets/images/f16.jpg'>").on("click", function() {
+  //add jets and click events, clicked jets 
+  $(".grid-item[data-grid~='1'").append("<img src='assets/images/f16.jpg' id='viper' data-type='jet'>").on("click", function() {
   
       let viper = new Character(25,50,100,"F-16 Viper",true);
       
       $("h2").text("You chose the " + viper.jetName);
+      goClear();
+      
+
   });
   
-  $(".grid-item[data-grid~='2'").append("<img src='assets/images/mig21.jpg'>").on("click", function() {
+  $(".grid-item[data-grid~='2'").append("<img src='assets/images/mig21.jpg' id='fishbed' data-type='jet'>").on("click", function() {
       
       let fishbed = new Character(25,25,25,"Mig-21 Fishbed",true);
       
       $("h2").text("You chose the " + fishbed.jetName);
+      $("#fishbed").css("opacity", "0.25" );
+      goClear();
+      
+      
   
   });
   
-  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg'>").on("click", function() {
+  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg' id='typhoon' data-type='jet'>").on("click", function() {
       
       let typhoon = new Character(100,50,100, "Eurofighter Typhoon", true);
       
       $("h2").text("You chose the " + typhoon.jetName);
+      goClear();
+     
   
   });
   
 
 }
 
-function select(selectedJet){
-  
+function goClear(){
+  $("img[data-type~='jet'").css("opacity", "0.25");
+}
+
+function reBuildPage(){
+  if(viper.cpu){
+    alert("I am player draw me in grid 4!")
+  }
 }
 //Excecute all the things in main.
 main();
