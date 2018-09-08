@@ -1,6 +1,8 @@
 body {
     background-image: url("../images/sky.jpg");
-    background-size: cover;
+    background-size: cover ;
+    height: 560px;
+    background-position-y: -400px;
 }
 
 .grid-container {
@@ -15,6 +17,7 @@ body {
     padding: 30px;
     font-size: 30px;
     text-align: center;
+    background-color: green;
     
   }
 
@@ -29,21 +32,44 @@ body {
 
   h1 {
       height: 60pxpx;
-      color: red;
+      color: yellow;
       background-color: skyblue;
       font-size: 3em;
       text-align: center;
       margin-top: 0px;
-      padding-top: 20px;
+      padding-top: 0px;
       background: transparent;
+      font-family: 'Space Mono', monospace;
   }
 
   h2 {
-      margin-top: 40px;
+      margin-top: 20px;
       color: greenyellow;
       font-size: 2em;
       height: 60px;
       text-align: center;
       background: transparent;
+  }
+
+  #grid7,#grid8,#grid9 {
+      background-color: black;
+  }
+
+  #flyBy {
+    
+  }
+  #conTrail {
+    float: left;
+    width: 75%;
+    height: 18px;
+    border-top: solid white 1px;
+    border-bottom: solid white 1px;
+  }
+
+  .fa-fighter-jet {
+      font-size: 1.33em;
+      color: silver;
+      margin-left: -4px;
+
   }
 

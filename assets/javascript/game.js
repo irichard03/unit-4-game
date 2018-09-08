@@ -19,12 +19,32 @@ $(document).ready(function() {
   debug();
 //Start of execution.
 
-  buildPage();
-  //end of execution
+  buildPage();  //setup 3x3 grid and defines space for player, opponent, and combat. 
+
+//end of execution
 
 //interal functions
-function buildPage(){
 
+function buildPage(){
+  
+
+  for(var i = 1; i <= 9; i++){
+    $(".grid-container").append("<div class='grid-item' id='grid" + i + "'>");
+    $("#" + i).text(i);
+
+  }
+
+  var playerBox = $("#grid4");
+  playerBox.attr("id","player");
+  var enemyBox = $("#grid6");
+  enemyBox.attr("id","enemy");
+  var splashOne =$("#grid7");
+  splashOne.attr("id","splashOne");
+  var splashTwo =$("#grid7");
+  splashOne.attr("id","splashTwo");
+
+
+  alert("Buildpage ran!");
 }
 
 function debug(){
