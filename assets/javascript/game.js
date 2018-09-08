@@ -30,14 +30,13 @@ function Character(hp, ap, cap, jet, cpu) {
   var seventhGrid = $(".grid-item[data-grid~='7'");
   var eighthGrid = $(".grid-item[data-grid~='8'");
   var ninthGrid = $(".grid-item[data-grid~='9'");
-  var paths = ["<img src='assets/images/f16.jpg' id='viper' data-type='preChoice'>","<img src='assets/images/mig21.jpg' id='fishbed' data-type='preChoice'>"]
+  var paths = ["<img src='assets/images/f16.jpg' id='viper' data-type='preChoice'>","<img src='assets/images/mig21.jpg' id='fishbed' data-type='preChoice'>","<img src='assets/images/typhoon.jpg' id='typhoon' data-type='preChoice'>"]
 
-//My initial goal is to house function calls in main to make code cleaner, and avoid scope issues. 
+//My initial goal is to house function calls in main to make code cleaner, and avoid scope issues
 function main(){
   
   $(document).ready(function() {
     buildPage();
-    
   
   });
 
@@ -57,6 +56,8 @@ function buildPage(){
       
       $("h2").text("You chose the " + viper.jetName);
       
+      goClear();
+      
       
 
   });
@@ -69,32 +70,30 @@ function buildPage(){
 
       $("h2").text("You chose the " + fishbed.jetName);
       
+      goClear();
       
-      
-  
   });
   
-  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg' id='typhoon' data-type='preChoice'>").on("click", function() {
+  thirdGrid.append(paths[2]).on("click", function() {
       
       let typhoon = new Character(100,50,100, "Eurofighter Typhoon", true);
       let fishbed = new Character(25,25,25,"Mig-21 Fishbed",false);
       let viper = new Character(25,50,100,"F-16 Viper",false);
 
       $("h2").text("You chose the " + typhoon.jetName);
+
       goClear();
-      
-     
   
   });
   
   
 }
+
 //makes selections transparent
 function goClear(){
   $("img[data-type~='preChoice'").css("opacity", "0.2");
   $(".grid-item").off();
                           
-
 }
 
 
