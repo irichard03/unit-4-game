@@ -1,113 +1,54 @@
+//Executes on page ready.
+$(document).ready(function() {
 
-//Character Object, will house jets and their properties.
-var character = {
-  hitPoints: -1,
-  attackPower: -1,
-  counterAttackPower: -1,
-  jetName: "potato",
-  player: false
-};
+  //define the character class
+  var character = {
+    hitPoints: -1,
+    attackPower: -1,
+    counterAttackPower: -1,
+    jetName: "potato",
+    player: false,
+    enmey: false,
+    path: ""
+  }
+  //create instances of the character class for each jet see Character Constructor function below for parameters.
+  var viper = new Character(25,50,100,"F-16 Viper",false,false,"assets/images/f16.jpg");
+  var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg");
+  var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg");
 
-//Constructor function to create Character Objects, arguments number, number, number, string, boolean
-function Character(hp, ap, cap, jet, cpu) {
+  debug();
+//Start of execution.
+
+  buildPage();
+  //end of execution
+
+//interal functions
+function buildPage(){
+
+}
+
+function debug(){
+  console.log(viper);
+  console.log(fishbed);
+  console.log(typhoon);
+}
+
+
+});
+//external functions
+
+//Constructor function to create Character Objects, arguments number, number, number, string, boolean, boolean
+function Character(hp, ap, cap, jet, good, bad, pic) {
   this.hitPoints = hp;
   this.attackPower = ap;
   this.counterAttackPower = cap;
   this.jetName = jet;
-  this.player = cpu;
-  
-};
-
-  //assigning jquery selectors to vars for easier selection.
-  var firstGrid = $(".grid-item[data-grid~='1'");
-  var secondGrid = $(".grid-item[data-grid~='2'");
-  var thirdGrid = $(".grid-item[data-grid~='3'");
-  var fourthGrid = $(".grid-item[data-grid~='4'");
-  var fifthtGrid = $(".grid-item[data-grid~='5'");
-  var sixthGrid = $(".grid-item[data-grid~='6'");
-  var seventhGrid = $(".grid-item[data-grid~='7'");
-  var eighthGrid = $(".grid-item[data-grid~='8'");
-  var ninthGrid = $(".grid-item[data-grid~='9'");
-  var paths = ["<img src='assets/images/f16.jpg' id='viper' data-type='preChoice'>","<img src='assets/images/mig21.jpg' id='fishbed' data-type='preChoice'>","<img src='assets/images/typhoon.jpg' id='typhoon' data-type='preChoice'>"];
-  
-  //Object instantiation
-  var viper = new Character(25,50,100,"F-16 Viper",false);
-  var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false);
-  var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false);
-
-
-$(document).ready(function() {
-  buildPage();
-});
-
-
-//Populates my html Grid with selectable fighters and creates jets objects as either player or cpu.
-function buildPage(){
-  
-  alert("BuildPageCalled");       //debugging
-  console.log("BuildPageCalled")  //debugging
-
-  firstGrid.append(paths[0]).on("click", function() {
-      
-      viper.player = true;
-     
-      $("h2").text("You chose the " + viper.jetName);
-      
-      goClear();
-      reBuildPage();
-       
-      
-      
-
-  });
-  
-  secondGrid.append(paths[1]).on("click", function() {
-      
-    fishbed.player = true;
-    console.log(fishbed.player);
-   
-      $("h2").text("You chose the " + fishbed.jetName);
-      
-      goClear();
-      reBuildPage(); 
-      
-      
-  });
-  
-  thirdGrid.append(paths[2]).on("click", function() {
-    
-    typhoon.player = true; 
-    
-      $("h2").text("You chose the " + typhoon.jetName);
-
-      goClear();
-      reBuildPage();
-     
-  });
-  
-  
+  this.player = good;
+  this.enemey = bad;
+  this.path = pic;  
 }
 
-//makes selections transparent
-function goClear(){
-  $("img[data-type~='preChoice'").css("opacity", "0.2");
-  $(".grid-item").off();
-                         
-}
 
-function reBuildPage(){
-  if(viper.player === true){
-    fourthGrid.append(paths[0]);
-  }
-  
-  if(fishbed.player){
-    fourthGrid.append(paths[1]);
-  }
-
-  if(typhoon.player){
-    fourthGrid.append(paths[2]);
-  }
-}
 
 /**
  * 
