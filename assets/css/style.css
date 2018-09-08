@@ -49,6 +49,7 @@ body {
       height: 60px;
       text-align: center;
       background: transparent;
+      font-family: 'Space Mono', monospace;
   }
 
   #grid7,#grid8,#grid9 {
@@ -64,12 +65,21 @@ body {
     height: 18px;
     border-top: solid white 1px;
     border-bottom: solid white 1px;
+    animation-name: streak;
+    animation-duration: 3s;
+    animation-delay: 1s;
+
   }
 
   .fa-fighter-jet {
       font-size: 1.33em;
       color: silver;
       margin-left: -4px;
+      
 
   }
 
+  @-webkit-keyframes streak {
+    0%  {width:0%;}
+    100% {width: 75%;}
+  }
