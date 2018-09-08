@@ -20,52 +20,61 @@ function Character(hp, ap, cap, jet, cpu) {
   
 }
 
-var MyJets = 3; //was going to do 4 jets but 9 grid is easier for central battle area.
-///var paths = [ 'assets/images/mig21.jpg', 'assets/images/f16.jpg', 'assets/images/typhoon.jpg']
+  //assigning jquery selectors to vars for easier selection.
+  var firstGrid = $(".grid-item[data-grid~='1'");
+  var secondGrid = $(".grid-item[data-grid~='2'");
+  var thirdGrid = $(".grid-item[data-grid~='3'");
+  var fourthGrid = $(".grid-item[data-grid~='4'");
+  var fifthtGrid = $(".grid-item[data-grid~='5'");
+  var sixthGrid = $(".grid-item[data-grid~='6'");
+  var seventhGrid = $(".grid-item[data-grid~='7'");
+  var eighthGrid = $(".grid-item[data-grid~='8'");
+  var ninthGrid = $(".grid-item[data-grid~='9'");
+  var paths = ["<img src='assets/images/f16.jpg' id='viper' data-type='preChoice'>","<img src='assets/images/mig21.jpg' id='fishbed' data-type='preChoice'>"]
 
-//here's where it happens...
+//My initial goal is to house function calls in main to make code cleaner, and avoid scope issues. 
 function main(){
   
   $(document).ready(function() {
     buildPage();
+    
   
   });
 
 }
-//Populates my html Grid with selectable fighters and creates jets objects.
+
+//Populates my html Grid with selectable fighters and creates jets objects as either player or cpu.
 function buildPage(){
   
-  alert("BuildPageCalled"); 
-  console.log("BuildPageCalled")
+  alert("BuildPageCalled");       //debugging
+  console.log("BuildPageCalled")  //debugging
 
-  //add jets and click events, clicked jets 
-  $(".grid-item[data-grid~='1'").append("<img src='assets/images/f16.jpg' id='viper' data-type='jet'>").on("click", function() {
-  
+  firstGrid.append(paths[0]).on("click", function() {
+      
       let viper = new Character(25,50,100,"F-16 Viper",true);
       let fishbed = new Character(25,25,25,"Mig-21 Fishbed",false);
       let typhoon = new Character(100,50,100, "Eurofighter Typhoon", false);
       
       $("h2").text("You chose the " + viper.jetName);
-      goClear();
+      
       
 
   });
   
-  $(".grid-item[data-grid~='2'").append("<img src='assets/images/mig21.jpg' id='fishbed' data-type='jet'>").on("click", function() {
+  secondGrid.append(paths[1]).on("click", function() {
       
       let fishbed = new Character(25,25,25,"Mig-21 Fishbed",true);
       let viper = new Character(25,50,100,"F-16 Viper",false);
       let typhoon = new Character(100,50,100, "Eurofighter Typhoon", false);
 
       $("h2").text("You chose the " + fishbed.jetName);
-      $("#fishbed").css("opacity", "0.25" );
-      goClear();
+      
       
       
   
   });
   
-  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg' id='typhoon' data-type='jet'>").on("click", function() {
+  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg' id='typhoon' data-type='preChoice'>").on("click", function() {
       
       let typhoon = new Character(100,50,100, "Eurofighter Typhoon", true);
       let fishbed = new Character(25,25,25,"Mig-21 Fishbed",false);
@@ -82,7 +91,8 @@ function buildPage(){
 }
 //makes selections transparent
 function goClear(){
-  $("img[data-type~='jet'").css("opacity", "0.2");
+  $("img[data-type~='preChoice'").css("opacity", "0.2");
+  $(".grid-item").off();
                           
 
 }
