@@ -28,24 +28,7 @@ function main(){
   
   $(document).ready(function() {
     buildPage();
-    
-    
-    
 
-  
-    
-    
-
-
-    
-  
-  
-  
-  
-  
-  
-  
-  
   });
 
 }
@@ -55,20 +38,36 @@ function buildPage(){
   alert("BuildPageCalled"); 
   console.log("BuildPageCalled")
 
+  //add jets and click events
   $(".grid-item[data-grid~='1'").append("<img src='assets/images/f16.jpg'>").on("click", function() {
-  //do this when clicked
+  
       let viper = new Character(25,50,100,"F-16 Viper",true);
-      alert("You chose the " + viper.jetName);
       
+      $("h2").text("You chose the " + viper.jetName);
   });
   
-  $(".grid-item[data-grid~='2'").append("<img src='assets/images/mig21.jpg'>");
+  $(".grid-item[data-grid~='2'").append("<img src='assets/images/mig21.jpg'>").on("click", function() {
+      
+      let fishbed = new Character(25,25,25,"Mig-21 Fishbed",true);
+      
+      $("h2").text("You chose the " + fishbed.jetName);
   
-  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg'>");
+  });
   
+  $(".grid-item[data-grid~='3'").append("<img src='assets/images/typhoon.jpg'>").on("click", function() {
+      
+      let typhoon = new Character(100,50,100, "Eurofighter Typhoon", true);
+      
+      $("h2").text("You chose the " + typhoon.jetName);
   
+  });
+  
+
 }
 
+function select(selectedJet){
+  
+}
 //Excecute all the things in main.
 main();
 
