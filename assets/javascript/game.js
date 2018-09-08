@@ -26,10 +26,11 @@ function main(){
   $(document).ready(function() {
   
     //Build html in buildPage Function
-    alert("BuildPageCalled"); 
+    
   
     buildPage();
-  
+    alert("BuildPageCalled"); 
+    $( "input[data-grid~='one']" ).append('img src="assets/images/mig21.jpg"');
   
   
   
@@ -44,12 +45,12 @@ function main(){
 }
 
 function buildPage(){
-  
+  /** 
     $('.airField').append('<img src="assets/images/f15.jpg" id="eagle">');
     $('.airField').append('<img src="assets/images/mig21.jpg" id="fishBed">');
     $('.airField').append('<img src="assets/images/F16.jpg" id="falcon">');
     $('.airField').append('<img src="assets/images/typhoon.jpg" id="typhoon">');
-    
+  */
 
   
 }

@@ -1,17 +1,19 @@
-
-.container {
+.grid-container {
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    background-color: skyblue;
-}
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
 
-img {
-    height: 80%;
-    width: 100%;
-    border: solid black 4px;
-    border-radius: 50%;
-}
+  img {
+      width: 80%;
+      height: 80%;
+  }
 
-body {
-    background-color: white;
-}
