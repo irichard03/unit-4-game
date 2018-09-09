@@ -55,12 +55,10 @@ body {
   }
 
   h3 {
-    margin-left: 33%;
-    width: 33%;
-    margin-right: 33%;
+    width: 100%;
     text-align: center;
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
     height: 60px;
     background-color: blue;
     font-family: 'Space Mono', monospace;
@@ -70,9 +68,9 @@ body {
     border: 4px white solid;
     padding-top: 20px;
     animation-name: flashy;
-    animation-duration: 1s;
-    animation-delay: 1s;
-    animation-iteration-count: infinite;
+    animation-duration: .25s;
+    animation-delay: 4s;
+    animation-iteration-count: 2;
 }
 
   p {
