@@ -155,12 +155,21 @@ function selectAirCraft(){
 function fight(){
   //alert("Fight called!");
   alert(player.jetName + " vs. " + enemy.jetName);
-  $("#grid2").append("<button id='attack'>Fire Missile</button>");
-  $("#attack").on("click",function(){
-   
+  $("#grid2").append("<button id='attack' type='button' onClick='missileAttack()'>Fire Missile</button>");
+
+  $("#attack").on("click", function(){
+    enemy.hitPoints -= player.attackPower;
     
+    if(enemy.hitPoints <= 0){
+      alert(player.jetName + "fires a missle, " + enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " was shot down!");
+    }
+    if(enemy.hitPoints > 0){
+      alert(player.jetName + "fires a missle, " + enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " has " + enemy.hitPoints + " remaining.");
+    }  
   });
 }
+
+
 
 function debug(){
   console.log(viper);
