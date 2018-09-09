@@ -13,9 +13,9 @@ $(document).ready(function() {
     alive: true,
   }
   //create instances of the character class for each jet.
-  var viper = new Character(25,50,100,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
-  var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
-  var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
+  var viper = new Character(6,2,1,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
+  var fishbed = new Character(6,1,3,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
+  var typhoon = new Character(6,3,2, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
   var player;
   var enemy;
   var gameState = "newGame";    //process is newGame - pickPlane - pickOpponent1 - fight  - pickOpponent2 - resolve - win/lose
@@ -72,6 +72,7 @@ function selectAirCraft(){
       player = viper;
       $("#grid4").off();
       gameState = "pickOpponent1";
+      $("#grid4").empty();
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
@@ -79,6 +80,7 @@ function selectAirCraft(){
       enemy = viper;
       $("#grid4").off();
       gameState = "pickOpponent2";
+      $("#grid4").empty();
       fight();
     }
     else if(gameState === "pickOpponent2"){
@@ -87,9 +89,11 @@ function selectAirCraft(){
       enemy = viper;
       $("#grid4").off();
       gameState = "resolve";
+      $("#grid4").empty();
+      fight();
     }
     
-    $("#grid4").empty();
+   
   });
 
   $("#grid5").on("click", function() {
@@ -100,6 +104,7 @@ function selectAirCraft(){
       player = fishbed;
       $("#grid5").off();
       gameState = "pickOpponent1";
+      $("#grid5").empty();
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fisbed'>");
@@ -108,6 +113,7 @@ function selectAirCraft(){
       $("#grid5").off();
       $("#fishbed").css("border","red");
       gameState = "pickOpponent2";
+      $("#grid5").empty();
       fight();
     }
     else if(gameState === "pickOpponent2"){
@@ -116,9 +122,11 @@ function selectAirCraft(){
       enemy = fishbed;
       $("#grid5").off();
       gameState = "resolve";
+      $("#grid5").empty();
+      fight();
     }
     
-    $("#grid5").empty();
+    
   });
 
   $("#grid6").on("click", function() {
@@ -129,6 +137,7 @@ function selectAirCraft(){
       player = typhoon;
       $("#grid6").off();
       gameState = "pickOpponent1";
+      $("#grid6").empty();
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
@@ -136,6 +145,7 @@ function selectAirCraft(){
       enemy = typhoon;
       $("#grid6").off();
       gameState = "pickOpponent2";
+      $("#grid6").empty();
       fight();
     }
     else if(gameState === "pickOpponent2"){
@@ -144,9 +154,12 @@ function selectAirCraft(){
       enemy=typhoon;
       $("#grid6").off();
       gameState = "resolve";
+      $("#grid6").empty();
+      fight();
+
     }
     
-    $("#grid6").empty();
+    
   });
 
   
@@ -159,9 +172,22 @@ function fight(){
 
   $("#attack").on("click", function(){
     enemy.hitPoints -= player.attackPower;
-    
+  
+    //check enemy hit points...
+    //if < 0 provide message, double attack power
     if(enemy.hitPoints <= 0){
       alert(player.jetName + "fires a missle, " + enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " was shot down!");
+      player.attackPower += player.attackPower;
+      //disable attack button and pick another opponent.
+      if(gameState != "resolve"){
+        $("#grid2").empty();
+        $("#enemy").empty();
+        selectAirCraft();
+      }
+      else if(gameState === "resolve"){
+        alert("Congratulations " + player.jetName + " pilot," + " you're the top ACE!");
+      }
+
     }
     if(enemy.hitPoints > 0){
       alert(player.jetName + "fires a missle, " + enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " has " + enemy.hitPoints + " remaining.");
@@ -198,7 +224,23 @@ function Character(hp, ap, cap, jet, good, bad, pic, status) {
 
 
 /**
+ *To do: 
+
+ change cap and ap to fit requirements:
+
+                  damage      counter damage            hp      2 kill f16  2 kill mig  2 kill typhoon
+    mig           1                 1                   6                     
+    f16           2                 3                   6
+    typhoon       3                 2                   6
+
+    IF KILLS TYPHOON 
+    MIG           4
+
+
+
+
  * 
+ *  
  *  Here's how the app works:
 
    * When the game starts, the player will choose a character by clicking on the fighter's picture. The player will fight as that character for the rest of the game.
