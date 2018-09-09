@@ -44,16 +44,16 @@ function buildPage(){
   }
  
   //define areas
-  $("#grid4").attr("id","player");
-  $("grid5").attr("id","combatZone");
-  $("#grid6").attr("id","enemy");
+  $("#grid1").attr("id","player");
+  $("grid2").attr("id","combatZone");
+  $("#grid3").attr("id","enemy");
   $("#grid7").attr("id","splashOne");
   $("#grid9").attr("id","splashTwo");
 
   //populate fighters
-  $("#grid1").append("<img src='" + viper.path + "' alt='f-16' id='viper'><p>1</p>");
-  $("#grid2").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'><p>2</p>");
-  $("#grid3").append("<img src='" + typhoon.path + "' alt='typhoon' id='typhoon'><p>3</p>");
+  $("#grid4").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
+  $("#grid5").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
+  $("#grid6").append("<img src='" + typhoon.path + "' alt='typhoon' id='typhoon'>");
 
 
   //alert("Buildpage ran!");
@@ -64,20 +64,20 @@ function buildPage(){
 
 function selectAirCraft(){
   
-  $("#grid1").on("click", function() {
+  $("#grid4").on("click", function() {
     //alert("YOU CLICKED ME");
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       viper.player = true;
       player = viper;
-      $("#grid1").off();
+      $("#grid4").off();
       gameState = "pickOpponent1";
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       viper.enemey = true;
       enemy = viper;
-      $("#grid1").off();
+      $("#grid4").off();
       gameState = "pickOpponent2";
       fight();
     }
@@ -85,27 +85,28 @@ function selectAirCraft(){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       viper.enemey = true;
       enemy = viper;
-      $("#grid1").off();
+      $("#grid4").off();
       gameState = "resolve";
     }
     
-    $("#grid1").empty();
+    $("#grid4").empty();
   });
 
-  $("#grid2").on("click", function() {
+  $("#grid5").on("click", function() {
     //alert("YOU CLICKED ME");
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
       fishbed.player = true;
       player = fishbed;
-      $("#grid2").off();
+      $("#grid5").off();
       gameState = "pickOpponent1";
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fisbed'>");
       fishbed.enemey = true;
       enemy = fishbed;
-      $("#grid2").off();
+      $("#grid5").off();
+      $("#fishbed").css("border","red");
       gameState = "pickOpponent2";
       fight();
     }
@@ -113,27 +114,27 @@ function selectAirCraft(){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
       fishbed.enemey = true;
       enemy = fishbed;
-      $("#grid2").off();
+      $("#grid5").off();
       gameState = "resolve";
     }
     
-    $("#grid2").empty();
+    $("#grid5").empty();
   });
 
-  $("#grid3").on("click", function() {
+  $("#grid6").on("click", function() {
     //alert("YOU CLICKED ME");
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
       typhoon.player = true;
       player = typhoon;
-      $("#grid3").off();
+      $("#grid6").off();
       gameState = "pickOpponent1";
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
       typhoon.enemey = true;
       enemy = typhoon;
-      $("#grid3").off();
+      $("#grid6").off();
       gameState = "pickOpponent2";
       fight();
     }
@@ -141,11 +142,11 @@ function selectAirCraft(){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
       typhoon.enemey = true;
       enemy=typhoon;
-      $("#grid3").off();
+      $("#grid6").off();
       gameState = "resolve";
     }
     
-    $("#grid3").empty();
+    $("#grid6").empty();
   });
 
   
@@ -154,7 +155,7 @@ function selectAirCraft(){
 function fight(){
   //alert("Fight called!");
   alert(player.jetName + " vs. " + enemy.jetName);
-  $("#grid5").append("<button id='attack'>Fire Missile</button>");
+  $("#grid2").append("<button id='attack'>Fire Missile</button>");
   $("#attack").on("click",function(){
    
     

@@ -7,9 +7,10 @@ body {
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
     padding: 10px;
+    
   }
   .grid-item {
     
@@ -21,23 +22,24 @@ body {
   }
 
   img {
-      width: 140px;
-      height: 160px;
+      width: 200px;
+      height: 220px;
       border-radius: 50%;
-      border: solid 6px greenyellow;
+      border: 2px dashed yellowgreen;
       background: transparent;
       
   }
 
   h1 {
       height: 60pxpx;
-      color: yellow;
-      background-color: skyblue;
+      color: white;
+      background: transparent;
       font-size: 3em;
       text-align: center;
       margin-top: 0px;
       padding-top: 0px;
-      background: transparent;
+      font-weight: bolder;
+      
       font-family: 'Space Mono', monospace;
   }
 
@@ -51,28 +53,51 @@ body {
       font-family: 'Space Mono', monospace;
   }
 
+  h3 {
+    margin-left: 33%;
+    width: 33%;
+    margin-right: 33%;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    height: 60px;
+    background-color: blue;
+    font-family: 'Space Mono', monospace;
+    position: fixed;
+    bottom: 0;
+    align-content: center;
+    border: 4px white solid;
+    padding-top: 20px;
+    animation-name: flashy;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+}
+
 
   
   #conTrail {
     float: left;
-    width: 75%;
+    width: 66%;
     height: 18px;
     border-top: solid white 1px;
+    background-color: red;
     border-bottom: solid white 1px;
-    animation-name: streak;
-    animation-duration: 3s;
+    animation-name: streak2;
+    animation-duration: 2s;
     animation-delay: 1s;
 
   }
 
   #conTrail2 {
-    float: right;
+    float: left;
     width: 75%;
     height: 18px;
     border-top: solid white 1px;
+    background-color: blue;
     border-bottom: solid white 1px;
-    animation-name: streak2;
-    animation-duration: 3s;
+    animation-name: streak;
+    animation-duration: 2s;
     animation-delay: 1s;
 
   }
@@ -80,7 +105,7 @@ body {
 
   .fa-fighter-jet {
       font-size: 1.33em;
-      color: silver;
+      color: white;
       margin-left: -4px;
       
   }
@@ -88,6 +113,20 @@ body {
   @-webkit-keyframes streak {
     0%  {width:0%;}
     100% {width: 75%;}
+  }
+
+  @-webkit-keyframes streak2 {
+    0%  {width:0%;}
+    100% {width: 66%;}
+  }
+
+  @-webkit-keyframes flashy {
+    0%   {opacity:1.0;}
+    25%  {opacity:.5;}
+    50%  {opacity:.25;}
+    75%  {opacity:.5;}
+    100% {opacity:1.0;}
+   
   }
 
   #attack {
