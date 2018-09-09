@@ -8,7 +8,7 @@ body {
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto;
     padding: 10px;
   }
   .grid-item {
@@ -21,8 +21,8 @@ body {
   }
 
   img {
-      width: 400px;
-      height: 360px;
+      width: 250px;
+      height: 200px;
       border-radius: 50%;
       border: solid 6px greenyellow;
       background: transparent;
@@ -65,15 +65,40 @@ body {
 
   }
 
+  #conTrail2 {
+    float: right;
+    width: 75%;
+    height: 18px;
+    border-top: solid white 1px;
+    border-bottom: solid white 1px;
+    animation-name: streak2;
+    animation-duration: 3s;
+    animation-delay: 1s;
+
+  }
+
+
   .fa-fighter-jet {
       font-size: 1.33em;
       color: silver;
       margin-left: -4px;
       
-
   }
 
   @-webkit-keyframes streak {
     0%  {width:0%;}
     100% {width: 75%;}
   }
+
+  #attack {
+      background-color: red;
+      border: black;
+      color: white;
+      height: 50%;
+      width: 50%;
+      font-family: 'Space Mono', monospace;
+      border: 4px solid maroon;
+      margin-top:40px;
+      
+  }
+
