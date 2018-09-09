@@ -16,6 +16,8 @@ $(document).ready(function() {
   var viper = new Character(25,50,100,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
   var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
   var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
+  var player;
+  var enemy;
   var gameState = "newGame";    //process is newGame - pickPlane - pickOpponent1 - fight  - pickOpponent2 - resolve - win/lose
   
 
@@ -54,7 +56,7 @@ function buildPage(){
   $("#grid3").append("<img src='" + typhoon.path + "' alt='typhoon' id='typhoon'><p>3</p>");
 
 
-  alert("Buildpage ran!");
+  //alert("Buildpage ran!");
   //debug();
   gameState="pickPlane";
 
@@ -63,16 +65,18 @@ function buildPage(){
 function selectAirCraft(){
   
   $("#grid1").on("click", function() {
-    alert("YOU CLICKED ME");
+    //alert("YOU CLICKED ME");
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       viper.player = true;
+      player = viper;
       $("#grid1").off();
       gameState = "pickOpponent1";
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       viper.enemey = true;
+      enemy = viper;
       $("#grid1").off();
       gameState = "pickOpponent2";
       fight();
@@ -80,6 +84,7 @@ function selectAirCraft(){
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       viper.enemey = true;
+      enemy = viper;
       $("#grid1").off();
       gameState = "resolve";
     }
@@ -88,16 +93,18 @@ function selectAirCraft(){
   });
 
   $("#grid2").on("click", function() {
-    alert("YOU CLICKED ME");
+    //alert("YOU CLICKED ME");
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
       fishbed.player = true;
+      player = fishbed;
       $("#grid2").off();
       gameState = "pickOpponent1";
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fisbed'>");
       fishbed.enemey = true;
+      enemy = fishbed;
       $("#grid2").off();
       gameState = "pickOpponent2";
       fight();
@@ -105,6 +112,7 @@ function selectAirCraft(){
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
       fishbed.enemey = true;
+      enemy = fishbed;
       $("#grid2").off();
       gameState = "resolve";
     }
@@ -113,16 +121,18 @@ function selectAirCraft(){
   });
 
   $("#grid3").on("click", function() {
-    alert("YOU CLICKED ME");
+    //alert("YOU CLICKED ME");
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
       typhoon.player = true;
+      player = typhoon;
       $("#grid3").off();
       gameState = "pickOpponent1";
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
       typhoon.enemey = true;
+      enemy = typhoon;
       $("#grid3").off();
       gameState = "pickOpponent2";
       fight();
@@ -130,6 +140,7 @@ function selectAirCraft(){
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
       typhoon.enemey = true;
+      enemy=typhoon;
       $("#grid3").off();
       gameState = "resolve";
     }
@@ -141,8 +152,13 @@ function selectAirCraft(){
 }
 
 function fight(){
-  alert("Fight called!");
+  //alert("Fight called!");
+  alert(player.jetName + " vs. " + enemy.jetName);
   $("#grid5").append("<button id='attack'>Fire Missile</button>");
+  $("#attack").on("click",function(){
+   
+    
+  });
 }
 
 function debug(){
