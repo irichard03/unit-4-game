@@ -9,20 +9,21 @@ $(document).ready(function() {
     jetName: "potato",
     player: false,
     enmey: false,
-    path: ""
+    path: "",
+    alive: true,
   }
-  //create instances of the character class for each jet see Character Constructor function below for parameters.
-  var viper = new Character(25,50,100,"F-16 Viper",false,false,"assets/images/f16.jpg");
-  var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg");
-  var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg");
+  //create instances of the character class for each jet.
+  var viper = new Character(25,50,100,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
+  var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
+  var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
   var gameState = "newGame";    //process is newGame - pickPlane - pickOpponent1 - fight - resolve - pickOpponent2 - resolve - win/lose
   
 
   debug();
 //Start of execution.
 
-  buildPage();  //setup 3x3 grid and defines space for player, opponent, and combat. 
-
+  buildPage();      //setup 3x3 grid and defines space for player, opponent, and combat. 
+  selectAirCraft(); //create onclick events to capture plane selection.
 //end of execution
 
 //interal functions
@@ -47,17 +48,65 @@ function buildPage(){
   splashOne.attr("id","splashTwo");
 
   //populate fighters
-  $("#grid1").append("<img src='" + viper.path + "' alt='f-16'>");
-  $("#grid2").append("<img src='" + fishbed.path + "' alt='mig-21'>");
-  $("#grid3").append("<img src='" + typhoon.path + "' alt='typhoon'>");
+  $("#grid1").append("<img src='" + viper.path + "' alt='f-16' id='viper'><p>1</p>");
+  $("#grid2").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'><p>2</p>");
+  $("#grid3").append("<img src='" + typhoon.path + "' alt='typhoon' id='typhoon'><p>3</p>");
 
 
   alert("Buildpage ran!");
-  debug();
+  //debug();
   gameState="pickPlane";
 
 }
 
+function selectAirCraft(){
+  
+  $("#grid1").on("click", function() {
+    alert("YOU CLICKED ME");
+    if(gameState === "pickPlane"){
+      $("#player").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
+      viper.player = true;
+      $("#grid1").off();
+      gameState = "pickOpponent1";
+    }
+    else if(gameState === "pickOpponent1"){
+      $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
+      viper.enemey = true;
+      $("#grid1").off();
+      gameState = "pickOpponent2";
+    }
+    else if(gameState === "pickOpponent2"){
+      $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
+      viper.enemey = true;
+      $("#grid1").off();
+    }
+    
+    $("#grid1").empty();
+  });
+
+  $("#grid2").on("click", function() {
+    alert("YOU CLICKED ME");
+    if(gameState === "pickPlane"){
+      $("#player").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
+      fishbed.player = true;
+      $("#grid2").off();
+      gameState = "pickOpponent1";
+    }
+    else if(gameState === "pickOpponent1"){
+      $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fisbed'>");
+      fishbed.enemey = true;
+      $("#grid2").off();
+      gamestate = "pickOpponent2";
+    }
+    else if(gameState === "pickOpponent2"){
+      $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
+      fishbed.enemey = true;
+      $("#grid2").off();
+    }
+    
+    $("#grid2").empty();
+  });
+}
 function debug(){
   console.log(viper);
   console.log(fishbed);
@@ -69,14 +118,15 @@ function debug(){
 //external functions
 
 //Constructor function to create Character Objects, arguments number, number, number, string, boolean, boolean
-function Character(hp, ap, cap, jet, good, bad, pic) {
+function Character(hp, ap, cap, jet, good, bad, pic, status) {
   this.hitPoints = hp;
   this.attackPower = ap;
   this.counterAttackPower = cap;
   this.jetName = jet;
   this.player = good;
   this.enemey = bad;
-  this.path = pic;  
+  this.path = pic;
+  this.alive = status;  
 }
 
 
