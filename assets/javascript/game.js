@@ -15,6 +15,8 @@ $(document).ready(function() {
   var viper = new Character(25,50,100,"F-16 Viper",false,false,"assets/images/f16.jpg");
   var fishbed = new Character(25,25,25,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg");
   var typhoon = new Character(100,50,100, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg");
+  var gameState = "newGame";    //process is newGame - pickPlane - pickOpponent1 - fight - resolve - pickOpponent2 - resolve - win/lose
+  
 
   debug();
 //Start of execution.
@@ -33,18 +35,27 @@ function buildPage(){
     $("#" + i).text(i);
 
   }
-
+ 
+  //define areas
   var playerBox = $("#grid4");
   playerBox.attr("id","player");
   var enemyBox = $("#grid6");
   enemyBox.attr("id","enemy");
   var splashOne =$("#grid7");
   splashOne.attr("id","splashOne");
-  var splashTwo =$("#grid7");
+  var splashTwo =$("#grid9");
   splashOne.attr("id","splashTwo");
+
+  //populate fighters
+  $("#grid1").append("<img src='" + viper.path + "' alt='f-16'>");
+  $("#grid2").append("<img src='" + fishbed.path + "' alt='mig-21'>");
+  $("#grid3").append("<img src='" + typhoon.path + "' alt='typhoon'>");
 
 
   alert("Buildpage ran!");
+  debug();
+  gameState="pickPlane";
+
 }
 
 function debug(){
@@ -67,6 +78,8 @@ function Character(hp, ap, cap, jet, good, bad, pic) {
   this.enemey = bad;
   this.path = pic;  
 }
+
+
 
 
 

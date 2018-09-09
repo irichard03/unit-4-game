@@ -13,11 +13,10 @@ body {
   }
   .grid-item {
     
-    border: 1px dotted yellowgreen;
     padding: 30px;
     font-size: 30px;
     text-align: center;
-    background-color: green;
+    background: transparent;
     
   }
 
@@ -52,13 +51,8 @@ body {
       font-family: 'Space Mono', monospace;
   }
 
-  #grid7,#grid8,#grid9 {
-      background-color: black;
-  }
 
-  #flyBy {
-    
-  }
+  
   #conTrail {
     float: left;
     width: 75%;
