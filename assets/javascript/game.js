@@ -191,6 +191,19 @@ function fight(){
     }
     if(enemy.hitPoints > 0){
       alert(player.jetName + "fires a missle, " + enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " has " + enemy.hitPoints + " remaining.");
+      player.hitPoints -= enemy.hitPoints;
+      if(player.hitPoints <= 0){
+        alert(enemy.jetName + "fires a missle at your " + player.jetName + ", you take " + enemy.counterAttackPower + " points of damage, and are shot down!\nYou Lose!!!!");
+       // $("#grid2").empty();
+       $("#grid2,#enemy,#player").empty();
+      // $("#enemy").empty();
+      // $("#player").empty();
+       $("#grid2").append("<img src='assets/images/MiG29crash.jpg' alt='mig 29 exploding at uk airshow'>");
+       $("#grid5,#grid4,#grid6").empty();
+       // $("h1").text("YOU LOSE.");
+       // $("#enemy").empty();
+
+      }
     }  
   });
 }
