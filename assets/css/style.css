@@ -54,7 +54,7 @@ body {
       font-family: 'Space Mono', monospace;
   }
 
-  h3 {
+  #message {
     width: 100%;
     text-align: center;
     color: white;
@@ -72,6 +72,28 @@ body {
     animation-delay: 4s;
     animation-iteration-count: 2;
 }
+
+  #playerMessage {
+    float: left;
+    font-size: .75em;
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    color: black;
+    background: white;
+    border: black 1px solid;
+  }
+
+  #enemyMessage {
+    float: right;
+    font-size: .75em;
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    color: black;
+    background: white;
+    border: black 1px solid;
+    
+  }
+  
 
   p {
     background-color: blue;

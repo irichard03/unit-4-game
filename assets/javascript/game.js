@@ -1,7 +1,7 @@
 //Executes on page ready.
 $(document).ready(function() {
 
-  //define the character class
+  //define the character class for my jets.
   var character = {
     hitPoints: -1,
     attackPower: -1,
@@ -12,13 +12,13 @@ $(document).ready(function() {
     path: "",
     alive: true,
   }
-  //create instances of the character class for each jet.
+  //create instances of the character class for each jet and gamestate for conditioanls.
   var viper = new Character(6,2,1,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
   var fishbed = new Character(6,2,1,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
   var typhoon = new Character(6,2,2, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
   var player;
   var enemy;
-  var gameState = "newGame";    //process is newGame - pickPlane - pickOpponent1 - fight  - pickOpponent2 - resolve - win/lose
+  var gameState = "newGame";    //process is  - pickPlane - pickOpponent1 - fight  - pickOpponent2 - resolve - win/lose
   
 
   debug();
@@ -43,41 +43,36 @@ function buildPage(){
 
   }
  
-  //define areas
+  //set aside the grid for specific functions. Splash ONe and Two were going to hold destroyed oppoenents, but I changed lay out.
   $("#grid1").attr("id","player");
   $("grid2").attr("id","combatZone");
   $("#grid3").attr("id","enemy");
   $("#grid7").attr("id","splashOne");
   $("#grid9").attr("id","splashTwo");
 
-  //populate fighters
-  //$("#player").append("<img src='assets/images/f22.jpg' alt='f-22' id='raptor placeholder' id='playerPlaceholder'>");
-  //$("#enemy").append("<img src='assets/images/j20.jpg' alt='j-20' id='chengdu placeholder' id='enemyPlacholder'>");
-  //$("#playerPlaceholder").css("opacity",".5");
-  //$("#enemyPlaceholder").css("opacity",".5");
+ //populates selectable jets in the grid middle row.
   $("#grid4").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
   $("#grid5").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
   $("#grid6").append("<img src='" + typhoon.path + "' alt='typhoon' id='typhoon'>");
 
-
-  
-  
+  //sets inital gamestate so the pickPlane function can called multiple times to select player, opponent, and opponent 2.
   gameState="pickPlane";
-
 }
 
+  //function to pick player and opponent. 
 function selectAirCraft(){
-  
+  //conditional, if not picking player's aircraft, you're pickign your opponent in this function.
   if(gameState != "pickPlane"){
     $("h3").text("Choose Opponent.");
   }
 
+  //This is my nasty on click function that has to be done for each image, I was originally using attributes to select but I was messing up the syntax so I went back to class and
   $("#grid4").on("click", function() {
     
-
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       $("#player").append("<p id='playerText'>" + viper.jetName + " HP: " + viper.hitPoints + " AP: " + viper.attackPower + "</p>");
+      $("#player").append("<h4 id='playerMessage'>Player Log</h3>");
       viper.player = true;
       player = viper;
       $("#grid4").off();
@@ -87,6 +82,7 @@ function selectAirCraft(){
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
       $("#enemy").append("<p id='enemyText'>" + viper.jetName + " HP: " + viper.hitPoints + " AP: " + viper.attackPower + "</p>");
+      $("#enemy").append("<h4 id='enemyMessage'>Enemy Log</h3>");
       viper.enemey = true;
       enemy = viper;
       $("#grid4,#grid5,#grid6").off();
