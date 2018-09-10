@@ -13,9 +13,9 @@ $(document).ready(function() {
     alive: true,
   }
   //create instances of the character class for each jet and gamestate for conditioanls.
-  var viper = new Character(6,2,1,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
-  var fishbed = new Character(6,2,1,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
-  var typhoon = new Character(6,2,2, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
+  var viper = new Character(4,2,2,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
+  var fishbed = new Character(4,2,1,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
+  var typhoon = new Character(4,2,3, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
   var player;
   var enemy;
   var gameState = "newGame";    //process is  - pickPlane - pickOpponent1 - fight  - pickOpponent2 - resolve - win/lose
@@ -63,8 +63,8 @@ function buildPage(){
   //function to pick player and opponent, set info text under player grid and enemy grid, and controls clearing grid after selection.
 function selectAirCraft(){
   //conditional, if not picking player's aircraft, you're pickign your opponent in this function.
-  if(gameState != "pickPlane"){
-    $("h3").text("Choose Opponent.");
+  if(gameState === "pickOpponent2"){
+    $("h3").text(enemy.jetName + "was shot down, Choose next Opponent.");
   }
 
   //This is my nasty on click function that has to be done for each image, I was originally using attributes to select but I was messing up the syntax so I went back to class and
@@ -108,7 +108,7 @@ function selectAirCraft(){
     
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
-      $("#player").append("<p id='playerText'>" + fishbed.jetName + "</p><p id='playerHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.attackPower + "</p><p id='playerLog'>Log</p>");
+      $("#player").append("<p id='playerText'>" + fishbed.jetName + "</p><p id='playerHP'>HP: " + fishbed.hitPoints + "</p><p id='playerAP'>AP: " + fishbed.attackPower + "</p><p id='playerLog'>Log</p>");
       fishbed.player = true;
       player = fishbed;
       $("#grid5").off();
@@ -165,7 +165,6 @@ function selectAirCraft(){
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
       $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + "</p><p id='enemyHP'>HP: " + typhoon.hitPoints + "</p><p id='enemyAP'>AP: " + typhoon.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
-      $("#enemy").append("<h4 id='enemyMessage'>Enemy Log</h3>");
       typhoon.enemey = true;
       enemy=typhoon;
       $("#grid6").off();
@@ -190,19 +189,22 @@ function fight(){
 
   $("#attack").on("click", function(){
     enemy.hitPoints -= player.attackPower;
-    $("#enemyText").text(enemy.jetName + "<p>HP: " + enemy.hitPoints + " AP: " + enemy.attackPower);
-    
+    $("#enemyHP").text("HP:" + enemy.hitPoints + "");
+    $("#enemyLog").text("Hit, takes " + player.attackPower + "damage.");
     if(enemy.hitPoints <= 0){
-      $("h3").text(enemy.jetName + "loses " + player.attackPower + " hp.  " + enemy.jetName + " was shot down!");
-      player.attackPower += player.attackPower;
-      $("#playerText").text(player.jetName + " HP: " + player.hitPoints + " AP: " + player.attackPower);
-      //disable attack button and pick another opponent.
+      
+      player.attackPower = player.attackPower * 2;
+      $("#playerLog").text("Attack power doubled!");
+      $("#playerAP").text("AP: " + player.attackPower + "");
+      
+      //disable attack button and pick another opponent. No counterattacking while being shot down.
       if(gameState != "resolve"){
         $("#grid2").empty();
         $("#enemy").empty();
         
         selectAirCraft();
       }
+      //Win condition is met, write to message, and display win image.
       else if(gameState === "resolve"){
         $("h3").text(enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " was shot down!\nCongratulations " + player.jetName + " pilot," + " you're the top ACE!");
         $("#grid2,#grid5,#grid4,#grid6,#player,#enemy").empty();
@@ -210,12 +212,18 @@ function fight(){
       }
 
     }
+
+    //counter attack & lose condtions
     if(enemy.hitPoints > 0){
-      $("h3").text(player.jetName + "fires a missle, " + enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " has " + enemy.hitPoints + " remaining.");
       player.hitPoints -= enemy.counterAttackPower;
-      $("player#Text").text(player.jetName + "<br>HP: " + player.hitPoints + "<br>AP: " + player.attackPower);
+      $("#playerHP").text("HP:" + player.hitPoints + "");
+      $("#playerLog").text("Hit, takes " + enemy.counterAttackPower + " damage.");
+
+      $("h3").text(player.jetName + "fires a missle, " + enemy.jetName + "loses " + player.attackPower + " hp.\n" + enemy.jetName + " has " + enemy.hitPoints + " remaining.");
+      
+      //$("#player#Text").text(player.jetName + "<br>HP: " + player.hitPoints + "<br>AP: " + player.attackPower);
       if(player.hitPoints <= 0){
-        $("h3").text(enemy.jetName + "fires a missle at you, you take " + enemy.counterAttackPower + " points of damage, and are shot down!\nYou Lose!!!!");
+        $("h3").text(enemy.jetName + " fires a missle at you, you take " + enemy.counterAttackPower + " points of damage, and are shot down!\nYou Lose!!!!");
         $("h3").css("animation-iteration-count","0");
       
        $("#grid2,#enemy,#player").empty();
