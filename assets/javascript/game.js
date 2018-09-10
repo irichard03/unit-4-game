@@ -1,27 +1,27 @@
 //Executes on page ready.
 $(document).ready(function() {
 
-  //define the character class for my jets.
+  //define the character class for my jets. I don't think I ever used alive property for anything.
   var character = {
     hitPoints: -1,
     attackPower: -1,
     counterAttackPower: -1,
-    jetName: "potato",
+    jetName: "potato",      //used in messages
     player: false,
     enmey: false,
-    path: "",
-    alive: true,
+    path: "",               //TAKE IN FILE PATH
+    alive: true,            
   }
   //create instances of the character class for each jet and gamestate for conditioanls.
-  var viper = new Character(4,2,2,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
-  var fishbed = new Character(4,2,1,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
-  var typhoon = new Character(4,2,3, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
+  var viper = new Character(20,15,20,"F-16 Viper",false,false,"assets/images/f16.jpg",true);
+  var fishbed = new Character(40,15,10,"Mig-21 Fishbed",false,false,"assets/images/mig21.jpg",true);
+  var typhoon = new Character(30,20,15, "Eurofighter Typhoon", false,false,"assets/images/typhoon.jpg",true);
   var player;
   var enemy;
   var gameState = "newGame";    //process is  - pickPlane - pickOpponent1 - fight  - pickOpponent2 - resolve - win/lose
   
 
-  debug();
+  //debug(); 
 //Start of execution.
 
   buildPage();      //setup 3x3 grid and defines space for player, opponent, and combat. 
@@ -44,7 +44,7 @@ function buildPage(){
 
   }
  
-  //set aside the grid for specific functions. Splash ONe and Two were going to hold destroyed oppoenents, but I changed lay out.
+  //set aside the grid for specific functions. Splash ONe and Two were going to hold destroyed oppoenents,but I just remove them now.
   $("#grid1").attr("id","player");
   $("grid2").attr("id","combatZone");
   $("#grid3").attr("id","enemy");
@@ -62,17 +62,20 @@ function buildPage(){
 
   //function to pick player and opponent, set info text under player grid and enemy grid, and controls clearing grid after selection.
 function selectAirCraft(){
-  //conditional, if not picking player's aircraft, you're pickign your opponent in this function.
+  //conditional, I didn't get timeout function to work so I have to be creative with messages in either player log or header as I haven't figure out how to time them.
   if(gameState === "pickOpponent2"){
     $("h3").text(enemy.jetName + "was shot down, Choose next Opponent.");
   }
 
-  //This is my nasty on click function that has to be done for each image, I was originally using attributes to select but I was messing up the syntax so I went back to class and
+  //This is my nasty on click function that has to be done for each image, I was originally using attributes to select but I was messing up the syntax so I went back to class and ID
+  //I started to lose track of what exists since it's not in the index.html.  I should have used a function to get the selection then pass it into a single on click function so I didn't have to
+  //write the same 3 code blocks 3 times.
+
   $("#grid4").on("click", function() {
     
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
-      $("#player").append("<p id='playerText'>" + viper.jetName + "</p><p id='playerHP'>HP: " + viper.hitPoints + "</p><p id='playerAP'>AP: " + viper.attackPower + "</p><p id='playerLog'>Log</p>");
+      $("#player").append("<p id='playerText'>" + viper.jetName + "</p><p id='playerHP'>HP: " + viper.hitPoints + "</p><p id='playerAP'>AP: " + viper.attackPower + "</p><p id='playerLog'>***</p>");
       viper.player = true;
       player = viper;
       $("#grid4").off();
@@ -82,7 +85,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
-      $("#enemy").append("<p id='enemyText'>" + viper.jetName + "</p><p id='enemyHP'>HP: " + viper.hitPoints + "</p><p id='enemyAP'>AP: " + viper.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
+      $("#enemy").append("<p id='enemyText'>" + viper.jetName + "</p><p id='enemyHP'>HP: " + viper.hitPoints + "</p><p id='enemyAP'>AP: " + viper.counterAttackPower + "</p><p id='enemyLog'>***</p>");
       viper.enemey = true;
       enemy = viper;
       $("#grid4,#grid5,#grid6").off();
@@ -92,7 +95,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
-      $("#enemy").append("<p id='enemyText'>" + viper.jetName + "</p><p id='enemyHP'>HP: " + viper.hitPoints + "</p><p id='enemyAP'>AP: " + viper.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
+      $("#enemy").append("<p id='enemyText'>" + viper.jetName + "</p><p id='enemyHP'>HP: " + viper.hitPoints + "</p><p id='enemyAP'>AP: " + viper.counterAttackPower + "</p><p id='enemyLog'>***</p>");
       viper.enemey = true;
       enemy = viper;
       $("#grid4").off();
@@ -104,11 +107,13 @@ function selectAirCraft(){
    
   });
 
+  //This handles the mig 21
+
   $("#grid5").on("click", function() {
     
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
-      $("#player").append("<p id='playerText'>" + fishbed.jetName + "</p><p id='playerHP'>HP: " + fishbed.hitPoints + "</p><p id='playerAP'>AP: " + fishbed.attackPower + "</p><p id='playerLog'>Log</p>");
+      $("#player").append("<p id='playerText'>" + fishbed.jetName + "</p><p id='playerHP'>HP: " + fishbed.hitPoints + "</p><p id='playerAP'>AP: " + fishbed.attackPower + "</p><p id='playerLog'>***</p>");
       fishbed.player = true;
       player = fishbed;
       $("#grid5").off();
@@ -118,7 +123,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fisbed'>");
-      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + "</p><p id='enemyHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
+      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + "</p><p id='enemyHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.counterAttackPower + "</p><p id='enemyLog'>***</p>");
       fishbed.enemey = true;
       enemy = fishbed;
       $("#grid4,#grid5,#grid6").off();
@@ -129,7 +134,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
-      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + "</p><p id='enemyHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
+      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + "</p><p id='enemyHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.counterAttackPower + "</p><p id='enemyLog'>***</p>");
       fishbed.enemey = true;
       enemy = fishbed;
       $("#grid5").off();
@@ -140,11 +145,12 @@ function selectAirCraft(){
     
   });
 
+  //this handles the eurofighter typhoon.
   $("#grid6").on("click", function() {
     
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
-      $("#player").append("<p id='playerText'>" + typhoon.jetName + "</p><p id='playerHP'>HP: " + typhoon.hitPoints + "</p><p id='playerAP'>AP: " + typhoon.attackPower + "</p><p id='playerLog'>Log</p>");
+      $("#player").append("<p id='playerText'>" + typhoon.jetName + "</p><p id='playerHP'>HP: " + typhoon.hitPoints + "</p><p id='playerAP'>AP: " + typhoon.attackPower + "</p><p id='playerLog'>***</p>");
       typhoon.player = true;
       player = typhoon;
       $("#grid6").off();
@@ -154,7 +160,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
-      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + "</p><p id='enemyHP'>HP: " + typhoon.hitPoints + "</p><p id='enemyAP'>AP: " + typhoon.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
+      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + "</p><p id='enemyHP'>HP: " + typhoon.hitPoints + "</p><p id='enemyAP'>AP: " + typhoon.counterAttackPower + "</p><p id='enemyLog'>***</p>");
       typhoon.enemey = true;
       enemy = typhoon;
       $("#grid4,#grid5,#grid6").off();
@@ -164,7 +170,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
-      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + "</p><p id='enemyHP'>HP: " + typhoon.hitPoints + "</p><p id='enemyAP'>AP: " + typhoon.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
+      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + "</p><p id='enemyHP'>HP: " + typhoon.hitPoints + "</p><p id='enemyAP'>AP: " + typhoon.counterAttackPower + "</p><p id='enemyLog'>***</p>");
       typhoon.enemey = true;
       enemy=typhoon;
       $("#grid6").off();
@@ -180,7 +186,8 @@ function selectAirCraft(){
 
   
 }
-
+//function to settle attack and counter attack, writes to enemy or player log during combat because I didn't figure out a way to separate attack and counterattack messages
+//so counter attack/attack would be overwritten by messages.
 function fight(){
 
   $("#grid2").append("<button id='attack' type='button' onClick='missileAttack()'>Fire Missile</button>");
@@ -238,7 +245,7 @@ function fight(){
 }
 
 
-
+//function I used to add debug values.
 function debug(){
   console.log(viper);
   console.log(fishbed);
@@ -247,7 +254,7 @@ function debug(){
 
 
 });
-//external functions
+
 
 //Constructor function to create Character Objects, arguments number, number, number, string, boolean, boolean
 function Character(hp, ap, cap, jet, good, bad, pic, status) {
@@ -260,63 +267,3 @@ function Character(hp, ap, cap, jet, good, bad, pic, status) {
   this.path = pic;
   this.alive = status;  
 }
-
-
-
-
-
-/**
- *To do: 
-
- change cap and ap to fit requirements:
-
-                  damage      counter damage            hp      2 kill f16  2 kill mig  2 kill typhoon
-    mig           1                 1                   6                    
-    f16           2                 1                   4
-    typhoon       2                 2                   6
-
-
-
-
-
- * 
- *  
- *  Here's how the app works:
-
-   * When the game starts, the player will choose a character by clicking on the fighter's picture. The player will fight as that character for the rest of the game.
-
-   * The player must then defeat all of the remaining fighters. Enemies should be moved to a different area of the screen.
-
-   * The player chooses an opponent by clicking on an enemy's picture.
-
-   * Once the player selects an opponent, that enemy is moved to a `defender area`.
-
-   * The player will now be able to click the `attack` button.
-     * Whenever the player clicks `attack`, their character damages the defender. The opponent will lose `HP` (health points). These points are displayed at the bottom of the defender's picture. 
-     * The opponent character will instantly counter the attack. When that happens, the player's character will lose some of their `HP`. These points are shown at the bottom of the player character's picture.
-
-3. The player will keep hitting the attack button in an effort to defeat their opponent.
-
-   * When the defender's `HP` is reduced to zero or below, remove the enemy from the `defender area`. The player character can now choose a new opponent.
-
-4. The player wins the game by defeating all enemy characters. The player loses the game the game if their character's `HP` falls to zero or below.
-
-##### Option 2 Game design notes
-
-* Each character in the game has 3 attributes: `Health Points`, `Attack Power` and `Counter Attack Power`.
-
-* Each time the player attacks, their character's Attack Power increases by its base Attack Power. 
-  * For example, if the base Attack Power is 6, each attack will increase the Attack Power by 6 (12, 18, 24, 30 and so on).
-* The enemy character only has `Counter Attack Power`. 
-
-  * Unlike the player's `Attack Points`, `Counter Attack Power` never changes.
-
-* The `Health Points`, `Attack Power` and `Counter Attack Power` of each character must differ.
-
-* No characters in the game can heal or recover Health Points. 
-
-  * A winning player must pick their characters wisely by first fighting an enemy with low `Counter Attack Power`. This will allow them to grind `Attack Power` and to take on enemies before they lose all of their `Health Points`. Healing options would mess with this dynamic.
-
-* Your players should be able to win and lose the game no matter what character they choose. The challenge should come from picking the right enemies, not choosing the strongest player.
-
- */

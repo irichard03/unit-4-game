@@ -8,7 +8,7 @@ body {
 .grid-container {
     display: grid;
     grid-template-columns: 33% 33% 33%;
-    grid-template-rows: 10% 16.18% 26.17%;
+    grid-template-rows: 240px 180px 100px;
     padding: 10px;
     
   }
@@ -22,12 +22,11 @@ body {
   }
 
   img {
-      width: 80%;
-      height: 100%px;
+      width: 180px;
+      height: 160px;
       border-radius: 50%;
       border: 4px solid blue;
       background: transparent;
-      margin: 0px;
       
   }
 
@@ -82,7 +81,7 @@ body {
     border-left: solid white 2px;
     border-right: solid white 2px;
     color: white;
-    font-size: .75em;
+    font-size: .5em;
     font-family: 'Space Mono', monospace;
   }
 
