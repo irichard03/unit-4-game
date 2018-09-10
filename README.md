@@ -1,6 +1,16 @@
 # unit-4-game
 JQuery game
 
+Instructions:
+
+  Click on the fighter you wish to be your aircraft.
+  
+  Pick your opponent.
+  
+  Fire missiles!
+  
+  If you defeat your opponent, try and take out his wingman to become the JQuery Top Ace!
+  
 
 Images credit:
 
@@ -16,6 +26,7 @@ Sky Photo: by Paweł Czerwiński on Unsplash
 
 Photo of russian knights display team at sunset:
 https://www.flickr.com/photos/mordolff/5691943705/ 
+
 
 
 **Pseudo Code**
