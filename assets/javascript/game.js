@@ -34,6 +34,7 @@ $(document).ready(function() {
 
 //interal functions
 
+//Setup the page, poulating grid.
 function buildPage(){
   
 
@@ -59,7 +60,7 @@ function buildPage(){
   gameState="pickPlane";
 }
 
-  //function to pick player and opponent. 
+  //function to pick player and opponent, set info text under player grid and enemy grid, and controls clearing grid after selection.
 function selectAirCraft(){
   //conditional, if not picking player's aircraft, you're pickign your opponent in this function.
   if(gameState != "pickPlane"){
@@ -71,18 +72,17 @@ function selectAirCraft(){
     
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
-      $("#player").append("<p id='playerText'>" + viper.jetName + " HP: " + viper.hitPoints + " AP: " + viper.attackPower + "</p>");
-      $("#player").append("<h4 id='playerMessage'>Player Log</h3>");
+      $("#player").append("<p id='playerText'>" + viper.jetName + "</p><p id='playerHP'>HP: " + viper.hitPoints + "</p><p id='playerAP'>AP: " + viper.attackPower + "</p><p id='playerLog'>Log</p>");
       viper.player = true;
       player = viper;
       $("#grid4").off();
       $("#grid4").empty();
       gameState = "pickOpponent1";
+      $("h3").text("Choose Opponent.");
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
-      $("#enemy").append("<p id='enemyText'>" + viper.jetName + " HP: " + viper.hitPoints + " AP: " + viper.attackPower + "</p>");
-      $("#enemy").append("<h4 id='enemyMessage'>Enemy Log</h3>");
+      $("#enemy").append("<p id='enemyText'>" + viper.jetName + "</p><p id='enemyHP'>HP: " + viper.hitPoints + "</p><p id='enemyAP'>AP: " + viper.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
       viper.enemey = true;
       enemy = viper;
       $("#grid4,#grid5,#grid6").off();
@@ -92,7 +92,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + viper.path + "' alt='f-16' id='viper'>");
-      $("#enemy").append("<p id='enemyText'>" + viper.jetName + " HP: " + viper.hitPoints + " AP: " + viper.attackPower + "</p>");
+      $("#enemy").append("<p id='enemyText'>" + viper.jetName + "</p><p id='enemyHP'>HP: " + viper.hitPoints + "</p><p id='enemyAP'>AP: " + viper.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
       viper.enemey = true;
       enemy = viper;
       $("#grid4").off();
@@ -108,7 +108,7 @@ function selectAirCraft(){
     
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
-      $("#player").append("<p id='playerText'>" + fishbed.jetName + " HP: " + fishbed.hitPoints + " AP: " + fishbed.attackPower + "</p>");
+      $("#player").append("<p id='playerText'>" + fishbed.jetName + "</p><p id='playerHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.attackPower + "</p><p id='playerLog'>Log</p>");
       fishbed.player = true;
       player = fishbed;
       $("#grid5").off();
@@ -118,7 +118,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fisbed'>");
-      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + " HP: " + fishbed.hitPoints + " AP: " + fishbed.attackPower + "</p>");
+      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + "</p><p id='enemyHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
       fishbed.enemey = true;
       enemy = fishbed;
       $("#grid4,#grid5,#grid6").off();
@@ -129,7 +129,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + fishbed.path + "' alt='mig-21' id='fishbed'>");
-      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + " HP: " + fishbed.hitPoints + " AP: " + fishbed.attackPower + "</p>");
+      $("#enemy").append("<p id='enemyText'>" + fishbed.jetName + "</p><p id='enemyHP'>HP: " + fishbed.hitPoints + "</p><p id='enemyAP'>AP: " + fishbed.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
       fishbed.enemey = true;
       enemy = fishbed;
       $("#grid5").off();
@@ -144,7 +144,7 @@ function selectAirCraft(){
     
     if(gameState === "pickPlane"){
       $("#player").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
-      $("#player").append("<p id='playerText'>" + typhoon.jetName + " HP: " + typhoon.hitPoints + " AP: " + typhoon.attackPower + "</p>");
+      $("#player").append("<p id='playerText'>" + typhoon.jetName + "</p><p id='playerHP'>HP: " + typhoon.hitPoints + "</p><p id='playerAP'>AP: " + typhoon.attackPower + "</p><p id='playerLog'>Log</p>");
       typhoon.player = true;
       player = typhoon;
       $("#grid6").off();
@@ -154,7 +154,7 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent1"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
-      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + " HP: " + typhoon.hitPoints + " AP: " + typhoon.attackPower + "</p>");
+      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + "</p><p id='enemyHP'>HP: " + typhoon.hitPoints + "</p><p id='enemyAP'>AP: " + typhoon.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
       typhoon.enemey = true;
       enemy = typhoon;
       $("#grid4,#grid5,#grid6").off();
@@ -164,7 +164,8 @@ function selectAirCraft(){
     }
     else if(gameState === "pickOpponent2"){
       $("#enemy").append("<img src='" + typhoon.path + "' alt='Typhoon' id='typhoon'>");
-      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + " HP: " + typhoon.hitPoints + " AP: " + typhoon.attackPower + "</p>");
+      $("#enemy").append("<p id='enemyText'>" + typhoon.jetName + "</p><p id='enemyHP'>HP: " + typhoon.hitPoints + "</p><p id='enemyAP'>AP: " + typhoon.counterAttackPower + "</p><p id='enemyLog'>Log</p>");
+      $("#enemy").append("<h4 id='enemyMessage'>Enemy Log</h3>");
       typhoon.enemey = true;
       enemy=typhoon;
       $("#grid6").off();
@@ -189,7 +190,7 @@ function fight(){
 
   $("#attack").on("click", function(){
     enemy.hitPoints -= player.attackPower;
-    $("#enemyText").text(enemy.jetName + " HP: " + enemy.hitPoints + " AP: " + enemy.attackPower);
+    $("#enemyText").text(enemy.jetName + "<p>HP: " + enemy.hitPoints + " AP: " + enemy.attackPower);
     
     if(enemy.hitPoints <= 0){
       $("h3").text(enemy.jetName + "loses " + player.attackPower + " hp.  " + enemy.jetName + " was shot down!");
